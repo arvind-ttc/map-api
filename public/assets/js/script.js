@@ -154,26 +154,6 @@ map.on('draw:created', function(e) {
   editableLayers.addLayer(layer);
 });
 
-let coordinatesContainer = document.getElementById("coordinates");
-
-function getSelectedCoordinates() {
-  const layer = editableLayers.getLayers()[0];
-  if (layer instanceof L.Polygon) {
-      const coordinates = layer.getLatLngs()[0];
-      let polygon = new Array();
-      coordinates.forEach(function(coord) {
-          var subres = new Array();
-          subres.push(coord.lat * 1000000);
-          subres.push(coord.lng * 1000000);
-
-          polygon.push(subres);
-      });
-      coordinatesContainer.innerText = JSON.stringify(polygon);
-  } else {
-      coordinatesContainer.innerHTML = "No shape selected";
-  }
-}
-
 async function postPolygon(body_data) {
   const url = 'http://127.0.0.1:8000/api/polygon';
 
